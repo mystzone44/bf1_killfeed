@@ -2,6 +2,7 @@ import json
 import requests
 from .endpoints import print_error_message, rpc_headers, rpc_request
 from . import endpoints
+import globals
 
 def search_server_by_name(server_name: str) -> tuple[bool, object]:
     json_body = rpc_request('GameServer.searchServers', {
@@ -48,8 +49,9 @@ def get_players_by_game_id(game_id: str) -> tuple[bool, dict]:
                 else:
                     teams[player['name']] =  player['player_id']
 
-            # # Also remove anyone from the kick list no longer in the game
-            # globals.kick_list.intersection_update(teams)
+            # Also remove anyone from the kick list no longer in the game
+            with globals.kick_list_lock:
+                globals.kick_list.intersection_update(teams)
 
             return True, teams
     except Exception as e:

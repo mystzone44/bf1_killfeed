@@ -1,0 +1,1 @@
+from .config import data, read_config
