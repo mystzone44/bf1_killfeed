@@ -45,10 +45,10 @@ class Model:
                 weapon = weapon_classes[box.cls[0]]
                 kick_players[player_name] = weapon
 
-                colour = (0, 255, 0)
-                thickness = 2
-                #name_image_enhanced = cv2.rectangle(name_image_enhanced, start_point, end_point, colour, thickness)
-                cv2.imshow('Result', name_image_enhanced)
-                cv2.waitKey()
+                # colour = (0, 255, 0)
+                # thickness = 2
+                # name_image_enhanced = cv2.rectangle(name_image_enhanced, start_point, end_point, colour, thickness)
+                # cv2.imshow('Result', name_image_enhanced)
+                # cv2.waitKey()
 
         return kick_players
