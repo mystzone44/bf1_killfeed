@@ -50,8 +50,7 @@ def get_players_by_game_id(game_id: str) -> tuple[bool, dict]:
                     teams[player['name']] =  player['player_id']
 
             # Also remove anyone from the kick list no longer in the game
-            with globals.kick_list_lock:
-                globals.kick_list.intersection_update(teams)
+            globals.kick_list.intersection_update(teams)
 
             return True, teams
     except Exception as e:

@@ -37,24 +37,22 @@ def recognize_player(image) -> str:
     if read_player_name is None:
         return None
     
-    return read_player_name
+    print(read_player_name)
 
-    with globals.teams_lock:
-        
-        # Initial search
-        player = search_for_player(read_player_name)
-        if player:
-            return player
+    # Initial search
+    player = search_for_player(read_player_name)
+    if player:
+        return player
 
-        # Get player list again and search
-        success, globals.teams = api.get_players_by_game_id(globals.game_id)
-        if not success:
-            print('Failed to get teams')
-            return False
-        
-        # Search again
-        player = search_for_player(read_player_name)
-        if player:
-            return player
+    # Get player list again and search
+    success, globals.teams = api.get_players_by_game_id(globals.game_id)
+    if not success:
+        print('Failed to get teams')
+        return False
+    
+    # Search again
+    player = search_for_player(read_player_name)
+    if player:
+        return player
 
     return None

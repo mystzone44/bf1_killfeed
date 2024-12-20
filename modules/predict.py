@@ -2,7 +2,6 @@ from ultralytics import YOLO
 import numpy as np
 from .player_name import recognize_player
 from .image_enhance import enhance_image
-import cv2
 
 class Model:
     def __init__(self):
@@ -10,12 +9,12 @@ class Model:
 
     def predict(self, image: np.ndarray):
 
-        cv2.imwrite('result.png', image)
         results = self.model.predict(image, verbose=False)
 
         kick_players = dict()
 
         for result in results:
+            result.save('result.png')
             np_result = result.numpy()
 
             for box in np_result.boxes:
@@ -44,6 +43,5 @@ class Model:
                 # start_point = (left_x-150, top_y)
                 # end_point = (left_x, bottom_y)
                 # name_image_enhanced = cv2.rectangle(name_image_enhanced, start_point, end_point, colour, thickness)
-                # cv2.imshow('Result', name_image_enhanced)
 
         return kick_players
